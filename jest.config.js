@@ -174,6 +174,7 @@ module.exports = {
     // '/node_modules/',
     // '\\.pnp\\.[^\\/]+$',
     '<rootDir>/node_modules/(?!(axios|gapi-script)/)',
+    '<rootDir>/\\.(css|less)$',
     // 'node_modules/(?!axios)',
     // '<rootDir>/node_modules/(?!gapi-script)',
   ],
@@ -192,4 +193,9 @@ module.exports = {
   // moduleNameMapper: {
   //   axios: 'axios/dist/node/axios.cjs',
   // },
+  moduleNameMapper: {
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+      '<rootDir>/__mocks__/fileMock.js',
+    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
+  },
 };
