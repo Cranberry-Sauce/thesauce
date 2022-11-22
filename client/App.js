@@ -9,7 +9,6 @@ const App = () => {
   const refresh = [];
   const loggedIn = window.localStorage.getItem('isLoggedIn');
   return (
-    // <Route basename='/thesauce'>
     <div id='body'>
       <Switch>
           <Route 
@@ -29,7 +28,6 @@ const App = () => {
           />
       </Switch>
     </div>
-    // </Route>
   )
 }
 /*
