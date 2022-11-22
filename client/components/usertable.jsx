@@ -26,8 +26,10 @@ export default function UserTable() {
     const { sortedUsers, requestSort, sortConfig } = useSortableData(users)
 
     function handleClickToLogout() {
+        window.localStorage.removeItem("isLoggedIn");
         setLogout(!logout);
     }
+    
 
     const redirect = []
     if (logout) {

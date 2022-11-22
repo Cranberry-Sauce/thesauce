@@ -5,7 +5,9 @@ import LoginButton from './components/login.jsx';
 import Signup from './components/Signup.jsx';
 
 const App = () => {
-
+  // const loggedIn = window.localStorage.getItem("isLoggedIn");
+  const refresh = [];
+  const loggedIn = window.localStorage.getItem('isLoggedIn');
   return (
     <div id='body'>
       <Switch>
