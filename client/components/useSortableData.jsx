@@ -6,15 +6,17 @@ export default function useSortableData(items, config = null) {
     const sortedItems = useMemo(() => {
         let sortableItems = [...items];
         if (sortConfig !== null) {
-            //if they are searching for imployed, convert the string to a boolean.
+            //if they choose to keep their email or salary private, we don't show that info. Helps with sorting
             sortableItems.forEach((item) => {
                 if (item.showsalary === false) item.salary = "-100000";
                 if (item.showemail === false) item.email = "a";
                 console.log(item);
             })
+
             sortableItems.sort((a, b) => {
                 //check if the sortConfig is a string. If it is, then we are able to call toLowerCase() on it before sorting
                 if (typeof a[sortConfig.key] === 'string') {
+
                     if (a[sortConfig.key].toLowerCase() < b[sortConfig.key].toLowerCase()) {
                         return sortConfig.direction === 'ascending' ? -1 : 1;
                     }
@@ -32,9 +34,8 @@ export default function useSortableData(items, config = null) {
                 }
                 return 0;
             });
-            console.log(`sortConfig`, JSON.stringify(sortConfig));
+            //if they entered a search param, we filter the list of users to only show the users that match the search param
             if (sortConfig.params) {
-
                 sortableItems = sortableItems.filter((item) => typeof item[sortConfig.searchKey] === 'string' ?
                     //if the sortConfig is a string, then we can call toLowerCase() on it before filtering
                     item[sortConfig.searchKey]?.toLowerCase().includes(sortConfig.params.toLowerCase()) :

@@ -6,6 +6,8 @@ import useSortableData from "./useSortableData"
 import SearchBar from "./SearchBar"
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import ReactDOM, { render } from 'react-dom';
+import profileImg from '../../assets/default-profile-img.png'
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -28,9 +30,20 @@ export default function UserTable() {
     const users = data || []
     const { sortedUsers, requestSort, sortConfig } = useSortableData(users)
 
+
     function handleClickToLogout() {
+        window.localStorage.removeItem("isLoggedIn");
         setLogout(!logout);
     }
+    
+    // const refresh = [];
+    // if (window.localStorage.getItem("isLoggedIn")) {
+    //     refresh.push(<Redirect to={{
+    //         pathname: '/home',
+    //         state: { logout: logout }
+    //     }}
+    //     />)
+    // }
 
     const redirect = []
     if (logout) {
@@ -167,7 +180,7 @@ export default function UserTable() {
                                             <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                                                 <div className="flex items-center">
                                                     <div className="h-10 w-10 flex-shrink-0">
-                                                        <img className="h-10 w-10 rounded-full" src={user.image_url} alt="" />
+                                                        <img className="h-10 w-10 rounded-full" src={user.image_url != 'undefined' ? user.image_url : profileImg} referrerPolicy="no-referrer" alt='' />
                                                     </div>
                                                     <div className="ml-4">
                                                         <div className="font-medium text-gray-900">{user.first_name + " " + user.last_name}</div>

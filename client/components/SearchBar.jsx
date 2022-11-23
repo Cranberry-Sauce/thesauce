@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 export default function SearchBar(params) {
     const { searchParam, setSearchParam, searchKey, setSearchKey, handleSearch } = params.params;
     const [lastSearchParam, setLastSearchParam] = useState(searchParam);
+    const [lastSearchKey, setLastSearchKey] = useState(searchKey);
     return (
         <div className='mt-6'>
             <label htmlFor="phone-number" className="block text-sm font-medium text-gray-700">
@@ -35,9 +36,10 @@ export default function SearchBar(params) {
                 <button
                     type="button"
                     onClick={() => {
-                        if (searchParam !== lastSearchParam) {
+                        if (searchParam !== lastSearchParam || searchKey !== lastSearchKey) {
                             handleSearch();
                             setLastSearchParam(searchParam);
+                            setLastSearchKey(searchKey);
                         }
                     }
                     } //dont allow the user to search if the search param is the same as the last search param

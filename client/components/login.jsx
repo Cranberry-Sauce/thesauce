@@ -60,6 +60,7 @@ function LoginButton(props) {
         axios.get('/api/signin', { params: { email: fetchEmail } })
             .then(({ data }) => {
                 if (!Object.keys(data).length) setFail(!fail)
+                window.localStorage.setItem("isLoggedIn", true);
                 setSuccess(!success);
             })
             .catch(console.error);
@@ -69,6 +70,15 @@ function LoginButton(props) {
     const onFailure = (res) => {
         //on failure redirect to signup
     }
+
+    const loggedIn = [];
+    if (window.localStorage.getItem("isLoggedIn")) {
+        loggedIn.push(<Redirect to={{
+            pathname: '/home'
+        }}
+        />)
+    }
+
     const signup = []
     if (fail) {
         signup.push(<Redirect to={{
@@ -104,6 +114,7 @@ function LoginButton(props) {
                 <Redirect to='/home'
                 />
             }
+            {loggedIn}
             {signup}
         </div>
     )
