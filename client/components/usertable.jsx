@@ -81,7 +81,7 @@ export default function UserTable() {
 
     return (
         <div className="px-4 sm:px-6 lg:px-8">
-            {showVerification && <VerificationCode code={verificationCode} />}
+            {showVerification && <VerificationCode code={verificationCode} show={showVerification} setShow={setShowVerification} />}
             <div className="sm:flex sm:items-center">
                 <div className="sm:flex-auto pt-5">
                     <h1 className="text-xl font-semibold text-gray-900">Codesmith Residents and Alumni</h1>

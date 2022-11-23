@@ -1107,6 +1107,10 @@ select {
   padding-right: 0.75rem;
 }
 
+.pl-40 {
+  padding-left: 10rem;
+}
+
 .text-left {
   text-align: left;
 }
