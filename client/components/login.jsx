@@ -73,13 +73,7 @@ function LoginButton(props) {
 
     const loggedIn = [];
     if (window.localStorage.getItem("isLoggedIn")) {
-<<<<<<< HEAD
         loggedIn.push(<Redirect to='/home'
-=======
-        loggedIn.push(<Redirect to={{
-            pathname: '/home'
-        }}
->>>>>>> dev
         />)
     }
 

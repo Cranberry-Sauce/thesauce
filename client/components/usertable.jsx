@@ -36,28 +36,16 @@ export default function UserTable() {
     const users = data || []
     const { sortedUsers, requestSort, sortConfig } = useSortableData(users)
 
-<<<<<<< HEAD
-    // const editPage = [];
-    // if (edit) {
-    //     console.log('hti edit path')
-    //     editPage.push(<Redirect to={{
-    //         pathname: '/edit'
-    //     }}
-    //     />)
-    // }
-
-    function goToEditComponent() {
-        // window.localStorage.removeItem("isLoggedIn")
-        setEdit(!edit);
-    }
-=======
->>>>>>> dev
 
     function handleClickToLogout() {
         window.localStorage.removeItem("isLoggedIn");
         setLogout(!logout);
     }
     
+    const goEdit =[];
+    function goToEditComponent () {
+        setEdit(!edit)
+    }
     // const refresh = [];
     // if (window.localStorage.getItem("isLoggedIn")) {
     //     refresh.push(<Redirect to={{
