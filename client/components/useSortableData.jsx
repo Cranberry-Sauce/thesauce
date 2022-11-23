@@ -9,14 +9,12 @@ export default function useSortableData(items, config = null) {
             //if they choose to keep their email or salary private, we don't show that info. Helps with sorting
             sortableItems.forEach((item) => {
                 if (item.showsalary === false) item.salary = "-100000";
-                if (item.showemail === false) item.email = "a";
-                console.log(item);
+                if (item.showemail === false) item.email = "prefer not to share";
             })
 
             sortableItems.sort((a, b) => {
                 //check if the sortConfig is a string. If it is, then we are able to call toLowerCase() on it before sorting
                 if (typeof a[sortConfig.key] === 'string') {
-
                     if (a[sortConfig.key].toLowerCase() < b[sortConfig.key].toLowerCase()) {
                         return sortConfig.direction === 'ascending' ? -1 : 1;
                     }
@@ -42,6 +40,14 @@ export default function useSortableData(items, config = null) {
                     //if the sortConfig is not a string, then we can't call toLowerCase() on it. So we just filter it as is
                     item[sortConfig.searchKey].toString()?.includes(sortConfig.params.toString())
                 )
+            }
+            //if they choose to keep their salary private, push the user to the bottom of the table
+            if (sortConfig.key === 'salary') {
+                sortableItems = sortableItems.sort((a, b) => {
+                    if (a.salary === "-100000") return 1;
+                    if (b.salary === "-100000") return -1;
+                    return 0;
+                })
             }
         }
         return sortableItems;

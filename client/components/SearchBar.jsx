@@ -30,7 +30,7 @@ export default function SearchBar(params) {
                         </select>
                     </div>
                     <input type="text" name="search-param" id="search-param" onChange={(e) => setSearchParam(e.target.value)} value={searchParam}
-                        className="block w-[500px] rounded-md border-gray-300 pl-16 focus:border-indigo-500 focus:ring-indigo-500 pl-48 sm:text-sm"
+                        className="block w-[500px] rounded-md border-gray-300 pl-16 focus:border-indigo-500 focus:ring-indigo-500 pl-40 sm:text-sm"
                         placeholder="John Doe" />
                 </div>
                 <button
