@@ -29,7 +29,18 @@ export default function SearchBar(params) {
                             <option value='linkedin' >LinkedIn</option>
                         </select>
                     </div>
-                    <input type="text" name="search-param" id="search-param" onChange={(e) => setSearchParam(e.target.value)} value={searchParam}
+                    <input type="text" name="search-param"
+                        id="search-param"
+                        onChange={(e) => setSearchParam(e.target.value)}
+                        value={searchParam}
+                        onSubmit={() => {
+                            if (searchParam !== lastSearchParam || searchKey !== lastSearchKey) {
+                                handleSearch();
+                                setLastSearchParam(searchParam);
+                                setLastSearchKey(searchKey);
+                            }
+                        }
+                        }
                         className="block w-[500px] rounded-md border-gray-300 pl-16 focus:border-indigo-500 focus:ring-indigo-500 pl-40 sm:text-sm"
                         placeholder="John Doe" />
                 </div>
