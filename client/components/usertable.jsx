@@ -5,6 +5,7 @@ import VerificationCode from "./VerificationCode"
 import useSortableData from "./useSortableData"
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import ReactDOM, { render } from 'react-dom';
+import React from 'react';
 import {
     BrowserRouter as Router,
     Switch,
