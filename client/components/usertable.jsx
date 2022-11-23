@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useDebugValue, useState } from "react"
 import useSWR from 'swr'
 import axios from 'axios'
 import VerificationCode from "./VerificationCode"
@@ -6,6 +6,8 @@ import useSortableData from "./useSortableData"
 import SearchBar from "./SearchBar"
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import ReactDOM, { render } from 'react-dom';
+import profileImg from '../../assets/default-profile-img.png'
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -34,6 +36,7 @@ export default function UserTable() {
     const users = data || []
     const { sortedUsers, requestSort, sortConfig } = useSortableData(users)
 
+<<<<<<< HEAD
     // const editPage = [];
     // if (edit) {
     //     console.log('hti edit path')
@@ -47,6 +50,8 @@ export default function UserTable() {
         // window.localStorage.removeItem("isLoggedIn")
         setEdit(!edit);
     }
+=======
+>>>>>>> dev
 
     function handleClickToLogout() {
         window.localStorage.removeItem("isLoggedIn");
@@ -211,11 +216,11 @@ export default function UserTable() {
                                 </thead>
                                 <tbody className="divide-y divide-gray-200 bg-white">
                                     {sortedUsers.map((user) => (
-                                        <tr key={user.email}>
+                                        <tr key={user._id}>
                                             <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                                                 <div className="flex items-center">
                                                     <div className="h-10 w-10 flex-shrink-0">
-                                                        <img className="h-10 w-10 rounded-full" src={user.image_url} alt="" />
+                                                        <img className="h-10 w-10 rounded-full" src={user.image_url != 'undefined' ? user.image_url : profileImg} referrerPolicy="no-referrer" alt='' />
                                                     </div>
                                                     <div className="ml-4">
                                                         <div className="font-medium text-gray-900">{user.first_name + " " + user.last_name}</div>

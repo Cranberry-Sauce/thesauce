@@ -70,10 +70,16 @@ function LoginButton(props) {
     const onFailure = (res) => {
         // window.localStorage.removeItem("isLoggedIn");
     }
-    
+
     const loggedIn = [];
     if (window.localStorage.getItem("isLoggedIn")) {
+<<<<<<< HEAD
         loggedIn.push(<Redirect to='/home'
+=======
+        loggedIn.push(<Redirect to={{
+            pathname: '/home'
+        }}
+>>>>>>> dev
         />)
     }
 
