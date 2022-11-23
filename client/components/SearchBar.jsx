@@ -20,7 +20,8 @@ export default function SearchBar(params) {
                             <option value='first_name' >First Name</option>
                             <option value='last_name' >Last Name</option>
                             <option value='email' >Email</option>
-                            <option value='cohort_num'>Cohort</option>
+                            <option value='cohort_num'>Cohort Number</option>
+                            <option value='cohort_location'>Cohort Location</option>
                             <option value='city' >Location</option>
                             <option value='resident_alum' >Resident/Alumni</option>
                             <option value='employer' >Company</option>

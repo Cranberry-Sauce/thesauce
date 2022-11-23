@@ -2,13 +2,16 @@ import { useState, useMemo } from "react"
 
 export default function useSortableData(items, config = null) {
     const [sortConfig, setSortConfig] = useState(config);
-    const [itemsToSort, setItemsToSort] = useState(items);
 
     const sortedItems = useMemo(() => {
         let sortableItems = [...items];
         if (sortConfig !== null) {
             //if they are searching for imployed, convert the string to a boolean.
-
+            sortableItems.forEach((item) => {
+                if (item.showsalary === false) item.salary = "-100000";
+                if (item.showemail === false) item.email = "a";
+                console.log(item);
+            })
             sortableItems.sort((a, b) => {
                 //check if the sortConfig is a string. If it is, then we are able to call toLowerCase() on it before sorting
                 if (typeof a[sortConfig.key] === 'string') {
