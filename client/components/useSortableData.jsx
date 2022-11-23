@@ -10,7 +10,6 @@ export default function useSortableData(items, config = null) {
             sortableItems.forEach((item) => {
                 if (item.showsalary === false) item.salary = "-100000";
                 if (item.showemail === false) item.email = "a";
-                console.log(item);
             })
 
             sortableItems.sort((a, b) => {

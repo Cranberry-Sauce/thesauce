@@ -35,7 +35,7 @@ export default function UserTable() {
         window.localStorage.removeItem("isLoggedIn");
         setLogout(!logout);
     }
-    
+
     // const refresh = [];
     // if (window.localStorage.getItem("isLoggedIn")) {
     //     refresh.push(<Redirect to={{
@@ -135,7 +135,7 @@ export default function UserTable() {
                                                 </span>
                                             </a>
                                         </th>
-                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900" onClick={() => handleSearch('residentOrAlum')}>
+                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900" onClick={() => handleSearch('resident_alum')}>
                                             <a href="#" className="group inline-flex">
                                                 Resident or Alumni
                                                 <span className={getClassNamesFor('residentOrAlum')}>
@@ -193,9 +193,14 @@ export default function UserTable() {
                                                 <div className="text-gray-500">{user.cohort_num}</div>
                                             </td>
                                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{user.city}</td>
-                                            {user.resident_alum && <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
-                                                    {user.resident_alum}
+                                            {user.resident_alum === 'alumni' && <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                <span className="inline-flex rounded-full bg-yellow-100 px-2 text-xs font-semibold leading-5 text-yellow-800">
+                                                    {user.resident_alum[0].toUpperCase() + user.resident_alum.slice(1)}
+                                                </span>
+                                            </td>}
+                                            {user.resident_alum === "resident" && <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                <span className="inline-flex rounded-full bg-blue-100 px-2 text-xs font-semibold leading-5 text-blue-800">
+                                                    {user.resident_alum[0].toUpperCase() + user.resident_alum.slice(1)}
                                                 </span>
                                             </td>}
                                             {user.employed && <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
