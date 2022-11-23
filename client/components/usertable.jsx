@@ -27,7 +27,6 @@ export default function UserTable() {
     const users = data || []
     const { sortedUsers, requestSort, sortConfig } = useSortableData(users)
 
-    const defaultImage = 'https://www.kindpng.com/picc/m/634-6340670_generic-profile-pic-circle-hd-png-download.png'
 
     function handleClickToLogout() {
         setLogout(!logout);
