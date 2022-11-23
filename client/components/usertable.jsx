@@ -3,6 +3,7 @@ import useSWR from 'swr'
 import axios from 'axios'
 import VerificationCode from "./VerificationCode"
 import useSortableData from "./useSortableData"
+import SearchBar from "./SearchBar"
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import ReactDOM, { render } from 'react-dom';
 import profileImg from '../../assets/default-profile-img.png'
@@ -24,6 +25,8 @@ export default function UserTable() {
     const [verificationCode, setVerificationCode] = useState("")
     const [clicked, setClick] = useState(false);
     const [logout, setLogout] = useState(false);
+    const [searchParam, setSearchParam] = useState("")
+    const [searchKey, setSearchKey] = useState("first_name")
     const users = data || []
     const { sortedUsers, requestSort, sortConfig } = useSortableData(users)
 
@@ -39,6 +42,9 @@ export default function UserTable() {
             state: { logout: logout }
         }}
         />)
+    }
+    function handleSearch(sortKey) {
+        requestSort(sortKey, searchKey, searchParam)
     }
 
     function handleShowVerification() {
@@ -69,9 +75,6 @@ export default function UserTable() {
             <div className="sm:flex sm:items-center">
                 <div className="sm:flex-auto pt-5">
                     <h1 className="text-xl font-semibold text-gray-900">Codesmith Residents and Alumni</h1>
-                    <p className="mt-2 text-sm text-gray-700">
-
-                    </p>
                 </div>
                 <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
                     <button
@@ -90,6 +93,7 @@ export default function UserTable() {
                     </button>
                 </div>
             </div>
+            <SearchBar params={{ searchParam, setSearchParam, searchKey, setSearchKey, handleSearch }} />
             <div className="mt-8 flex flex-col">
                 <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -97,23 +101,23 @@ export default function UserTable() {
                             <table className="min-w-full divide-y divide-gray-300">
                                 <thead className="bg-gray-50">
                                     <tr>
-                                        <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" onClick={() => requestSort('first_name')}>
+                                        <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" onClick={() => handleSearch("first_name")}>
                                             <a href="#" className="group inline-flex">
                                                 Name
-                                                <span className={getClassNamesFor('firstName')}>
+                                                <span className={getClassNamesFor('first_name')}>
                                                     <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
                                                 </span>
                                             </a>
                                         </th>
-                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900" onClick={() => requestSort('cohort_num')}>
+                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900" onClick={() => handleSearch('cohort_num')}>
                                             <a href="#" className="group inline-flex">
                                                 Cohort
-                                                <span className={getClassNamesFor('cohortNum')}>
+                                                <span className={getClassNamesFor('cohort_num')}>
                                                     <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
                                                 </span>
                                             </a>
                                         </th>
-                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900" onClick={() => requestSort('city')}>
+                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900" onClick={() => handleSearch('city')}>
                                             <a href="#" className="group inline-flex">
                                                 Location
                                                 <span className={getClassNamesFor('city')}>
@@ -121,7 +125,7 @@ export default function UserTable() {
                                                 </span>
                                             </a>
                                         </th>
-                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900" onClick={() => requestSort('residentOrAlum')}>
+                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900" onClick={() => handleSearch('residentOrAlum')}>
                                             <a href="#" className="group inline-flex">
                                                 Resident or Alumni
                                                 <span className={getClassNamesFor('residentOrAlum')}>
@@ -129,7 +133,7 @@ export default function UserTable() {
                                                 </span>
                                             </a>
                                         </th>
-                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900" onClick={() => requestSort('employed')}>
+                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900" onClick={() => handleSearch('employed')}>
                                             <a href="#" className="group inline-flex">
                                                 Employment Status
                                                 <span className={getClassNamesFor('employed')}>
@@ -137,7 +141,7 @@ export default function UserTable() {
                                                 </span>
                                             </a>
                                         </th>
-                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900" onClick={() => requestSort('employer')}>
+                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900" onClick={() => handleSearch('employer')}>
                                             <a href="#" className="group inline-flex">
                                                 Company
                                                 <span className={getClassNamesFor('employer')}>
@@ -145,7 +149,7 @@ export default function UserTable() {
                                                 </span>
                                             </a>
                                         </th>
-                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900" onClick={() => requestSort('salary')}>
+                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900" onClick={() => handleSearch('salary')}>
                                             <a href="#" className="group inline-flex">
                                                 Salary
                                                 <span className={getClassNamesFor('salary')}>
