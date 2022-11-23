@@ -5,12 +5,14 @@ import {
     Route,
     Link,
     Redirect,
-    withRouter
+    withRouter,
+    useLocation,
 } from "react-router-dom";
 
 function EditProfileComponent() {
-    const userInfo = url => axios.get(url).then(res => res.data)
-
+    // const userInfo = url => axios.get(url).then(res => res.data)
+    const {state} = useLocation();
+    console.log(state);
     const [home, setHome] = useState(false);
     function saveChanges() {
         setHome(true);
@@ -24,8 +26,8 @@ function EditProfileComponent() {
 
   return (
     <div>
-        <h1> Edit Profile Here </h1>
-        <form>
+        <h1 id='editProfileHeading'> Edit Profile Here </h1>
+        <form id='formBox'>
           <label for='firstName'>First name:</label>
           <input type='text' id='firstName' placeholder='first name' onChange={(e) => setFirstName(e.target.value)} required></input>
 
@@ -33,7 +35,7 @@ function EditProfileComponent() {
           <input type='text' id='lastName' placeholder='last name' onChange={(e) => setLastName(e.target.value)} required></input>
 
           <label for='email'>Email:<br></br></label>
-          <input type='text' id='email' placeholder='email' disabled='disabled' required></input>
+          <input type='text' id='email' placeholder='email'  disabled='disabled' required></input>
 
           <div className='visibility'>
             <label for='emailVisibility'>Make your email visible to other Codesmith residents/alumn?<br></br></label>

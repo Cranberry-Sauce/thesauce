@@ -12,12 +12,17 @@ import {
     Route,
     Link,
     Redirect,
-    withRouter
+    withRouter,
 } from "react-router-dom";
+import { useEffect } from 'react';
 
 const fetcher = url => axios.get(url).then(res => res.data)
 
 export default function UserTable() {
+    // useEffect(() => {
+    //     window.localStorage.setItem("isLoggedIn", true);
+    // });
+
     const { data, error } = useSWR("/api/getAll", fetcher)
     const [showVerification, setShowVerification] = useState(false)
     const [verificationCode, setVerificationCode] = useState("")
@@ -37,7 +42,7 @@ export default function UserTable() {
     //     }}
     //     />)
     // }
-   
+
     function goToEditComponent() {
         // window.localStorage.removeItem("isLoggedIn")
         setEdit(!edit);
@@ -56,6 +61,10 @@ export default function UserTable() {
     //     }}
     //     />)
     // }
+    const notLoggedIn = [];
+    if (!window.localStorage.getItem("isLoggedIn")) {
+        notLoggedIn.push(<Redirect to ='/signup'/>)
+    }
 
     const redirect = []
     if (logout) {
@@ -65,6 +74,10 @@ export default function UserTable() {
         }}
         />)
     }
+
+    // useEffect() {
+    //     window.localStorage.setItem("isLoggedIn", true)
+    // }
 
     function handleSearch(sortKey) {
         requestSort(sortKey, searchKey, searchParam)
