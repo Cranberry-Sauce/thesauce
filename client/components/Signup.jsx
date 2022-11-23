@@ -19,13 +19,15 @@ function Signup() {
   const { state } = useLocation();
   const [firstName, setFirstName] = useState(state.firstName);
   const [lastName, setLastName] = useState(state.lastName);
-  let showSalary = false;
-  let showEmail = false;
+  const [employed, setEmployed] = useState("false");
+  const [employer, setEmployer] = useState("");
+  const [showSalary, setShowSalary] = useState(true);
+  let [showEmail, setShowEmail] = useState(true);
 
   let element = document.getElementById('verification');
   let addError = function () { element.classList.add('error'); };
   const removeError = function () { setMatchVer('') };
-  
+
   // //everytime u go to signup page, remove isLoggedIn
   // window.localStorage.removeItem("isLoggedin");
   if (window.localStorage.getItem("isLoggedIn")) {
@@ -55,40 +57,16 @@ function Signup() {
             salary: event.target.salary.value,
             showsalary: showSalary,
             cohortNum: event.target.cohortNum.value,
-            // password: '00000000',
-            // passwordConfirm: '00000000',
             linkedin: event.target.linkedin.value,
             verification: event.target.verification.value,
           })
             .then((data) => {
-              window.localStorage.setItem("isLoggedIn", true); 
+              window.localStorage.setItem("isLoggedIn", true);
               setSignPage(!signupPage);
             })
             .catch(console.log('error'));
         }
       })
-    // axios.post('/api/signup', {
-    //   imageUrl: state.imageUrl,
-    //   firstName: event.target.firstName.value.charAt(0).toUpperCase() + event.target.firstName.value.slice(1),
-    //   lastName: event.target.lastName.value,
-    //   email: event.target.email.value,
-    //   residentAlum: event.target.residentAlum.value,
-    //   cohortLocation: event.target.cohortLocation.value,
-    //   city: event.target.city.value.charAt(0).toUpperCase() + event.target.city.value.slice(1), 
-    //   employed: event.target.employed.value,
-    //   employer: event.target.employer.value.charAt(0).toUpperCase() + event.target.employer.value.slice(1), 
-    //   salary: event.target.salary.value,
-    //   cohortNum: event.target.cohortNum.value,
-    //   // password: '00000000',
-    //   // passwordConfirm: '00000000',
-    //   linkedin: event.target.linkedin.value,
-    //   verification: event.target.verification.value,
-    // })
-    // .then((data) => {
-    //   setSignPage(!signupPage);
-    //   console.log(signupPage)
-    // })
-    // .catch(console.log('error'));
   }
 
   return (
@@ -107,7 +85,7 @@ function Signup() {
 
           <div className='visibility'>
             <label for='emailVisibility'>Make your email visible to other Codesmith residents/alumn?<br></br></label>
-            <input type='checkbox' value={showEmail} onChange={() => showEmail = !showEmail} id='emailVisibility'></input>
+            <input type='checkbox' checked={showEmail} value={showEmail} onChange={() => setShowEmail((showEmail) => !showEmail)} id='emailVisibility'></input>
           </div>
 
           <label for='residentAlum'>Resident/Alumni:<br></br></label>
@@ -134,20 +112,24 @@ function Signup() {
           <input type='url' id='linkedin' placeholder='Linkedin' required></input>
 
           <label for='employed'> Employment Status: </label>
-          <select id='employed'>
-            <option value="true">Currently Unemployed</option>
-            <option value="false">Currently Employed</option>
+          <select id='employed'
+            value={employed}
+            onChange={(e) => setEmployed(e.target.value)}>
+            <option value="false">Currently Unemployed</option>
+            <option value="true">Currently Employed</option>
           </select>
 
           <label for='employer'>Employer:<br></br></label>
-          <input type='text' id='employer' placeholder='Job Title' required></input>
+          <input type='text' id='employer' placeholder='Job Title' disabled={employed === "false" ? true : false}
+            className={employed === "false" ? "bg-gray-100 text-center" : ""}
+            value={employed === "false" ? "N/A" : employer} onChange={(e) => setEmployer(e.target.value)} required></input>
 
           <label for='salary'>Current Salary:<br></br></label>
           <input type='number' id='salary' placeholder='Current Salary' min='0' required></input>
 
           <div className='visibility'>
             <label for='salaryVisibility'>Make your salary visible to other Codesmith residents/alumn?<br></br></label>
-            <input type='checkbox' value={showSalary} onChange={() => showSalary = !showSalary} id='salaryVisibility'></input>
+            <input type='checkbox' checked={showSalary} value={showSalary} onChange={() => setShowSalary((showSalary) => !showSalary)} id='salaryVisibility'></input>
           </div>
 
           <label for='verification'>Verification code:<br></br></label>
@@ -155,7 +137,7 @@ function Signup() {
 
           <button id='submitButton' type='submit'>Submit</button>
         </form>
-        : <Redirect to='/home'/>}
+        : <Redirect to='/home' />}
     </div>
   )
 }
