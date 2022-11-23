@@ -2,3 +2,5 @@ node_modules/
 pb_data/
 pocketbase
 dist/
+coverage/
+output.css

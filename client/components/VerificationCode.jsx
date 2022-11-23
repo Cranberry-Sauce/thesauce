@@ -4,7 +4,7 @@ import { CheckCircleIcon } from '@heroicons/react/24/outline'
 import { XMarkIcon } from '@heroicons/react/20/solid'
 
 export default function VerificationCode(params) {
-    const [show, setShow] = useState(true)
+    const { show, setShow } = params
 
     return (
         <>

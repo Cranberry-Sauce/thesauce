@@ -60,6 +60,7 @@ function LoginButton(props) {
         axios.get('/api/signin', { params: { email: fetchEmail } })
             .then(({ data }) => {
                 if (!Object.keys(data).length) setFail(!fail)
+                window.localStorage.setItem("isLoggedIn", true);
                 setSuccess(!success);
             })
             .catch(console.error);
@@ -67,10 +68,18 @@ function LoginButton(props) {
 
     //fail verif by google -> route to signup page
     const onFailure = (res) => {
-        //on failure redirect to signup
+        // window.localStorage.removeItem("isLoggedIn");
     }
+
+    const loggedIn = [];
+    if (window.localStorage.getItem("isLoggedIn")) {
+        loggedIn.push(<Redirect to='/home'
+        />)
+    }
+
     const signup = []
     if (fail) {
+        window.localStorage.removeItem("isLoggedIn"); 
         signup.push(<Redirect to={{
             pathname: '/signup',
             state: {
@@ -101,9 +110,12 @@ function LoginButton(props) {
                     />
                 </div>
                 :
-                <Redirect to='/home'
+                <Redirect to={{
+                    pathname: '/home',
+                }}
                 />
             }
+            {loggedIn}
             {signup}
         </div>
     )

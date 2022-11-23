@@ -78,6 +78,16 @@ h1 {
   padding-left: 7px;
 }
 
+#editProfileHeading{
+  font-size: 40px;
+  font-weight: bold;
+    display: flex;
+  flex-direction: column;
+  /* align-items: center;
+  justify-content: center; */
+  margin-left: 20px;
+}
+
 #email {
   border: 1px solid white;
 }

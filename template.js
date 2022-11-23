@@ -3,6 +3,7 @@ export default () => {
     <html lang="en">
     <head>
     <meta charset="utf-8">
+    </script>
     <title>GoblinShark</title>
     </head>
     <body>
