@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useDebugValue, useState } from "react"
 import useSWR from 'swr'
 import axios from 'axios'
 import VerificationCode from "./VerificationCode"
@@ -176,7 +176,7 @@ export default function UserTable() {
                                 </thead>
                                 <tbody className="divide-y divide-gray-200 bg-white">
                                     {sortedUsers.map((user) => (
-                                        <tr key={user.email}>
+                                        <tr key={user._id}>
                                             <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                                                 <div className="flex items-center">
                                                     <div className="h-10 w-10 flex-shrink-0">
