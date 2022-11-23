@@ -1,9 +1,9 @@
 import { hot } from 'react-hot-loader/root';
-import UserTable from './components/usertable';
+import UserTable from './components/usertable.jsx';
 import { Switch, Route } from "react-router-dom";
 import LoginButton from './components/login.jsx';
 import Signup from './components/Signup.jsx';
-
+import EditProfileComponent from './components/EditProfileComponent.jsx';
 const App = () => {
   // const loggedIn = window.localStorage.getItem("isLoggedIn");
   const refresh = [];
@@ -11,6 +11,11 @@ const App = () => {
   return (
     <div id='body'>
       <Switch>
+         <Route
+              exact
+              path='/edit'
+              component={EditProfileComponent}
+          />
           <Route 
               exact
               path='/'
