@@ -830,6 +830,8 @@ select {
   margin-top: 2rem;
 }
 
+<<<<<<< HEAD
+=======
 .ml-10 {
   margin-left: 2.5rem;
 }
@@ -858,6 +860,7 @@ select {
   display: block;
 }
 
+>>>>>>> dev
 .inline-block {
   display: inline-block;
 }
@@ -1163,6 +1166,8 @@ select {
   padding-right: 0.5rem;
 }
 
+<<<<<<< HEAD
+=======
 .pl-3 {
   padding-left: 0.75rem;
 }
@@ -1175,6 +1180,7 @@ select {
   padding-left: 4rem;
 }
 
+>>>>>>> dev
 .pt-0\.5 {
   padding-top: 0.125rem;
 }
@@ -1195,6 +1201,8 @@ select {
   padding-right: 0.75rem;
 }
 
+<<<<<<< HEAD
+=======
 .pl-10 {
   padding-left: 2.5rem;
 }
@@ -1211,6 +1219,7 @@ select {
   padding-left: 12rem;
 }
 
+>>>>>>> dev
 .text-left {
   text-align: left;
 }

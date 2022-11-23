@@ -32,8 +32,18 @@ export default function UserTable() {
 
 
     function handleClickToLogout() {
+        window.localStorage.removeItem("isLoggedIn");
         setLogout(!logout);
     }
+    
+    // const refresh = [];
+    // if (window.localStorage.getItem("isLoggedIn")) {
+    //     refresh.push(<Redirect to={{
+    //         pathname: '/home',
+    //         state: { logout: logout }
+    //     }}
+    //     />)
+    // }
 
     const redirect = []
     if (logout) {

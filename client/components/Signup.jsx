@@ -136,7 +136,7 @@ function Signup() {
           <input type='text' id='employer' placeholder='Job Title' required></input>
 
           <label for='salary'>Current Salary:<br></br></label>
-          <input type='number' id='salary' placeholder='Current Salary' required></input>
+          <input type='number' id='salary' placeholder='Current Salary' min='0' required></input>
 
           <div className='visibility'>
             <label for='salaryVisibility'>Make your salary visible to other Codesmith residents/alumn?<br></br></label>
