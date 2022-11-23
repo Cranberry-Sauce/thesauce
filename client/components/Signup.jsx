@@ -25,6 +25,12 @@ function Signup() {
   let element = document.getElementById('verification');
   let addError = function () { element.classList.add('error'); };
   const removeError = function () { setMatchVer('') };
+  
+  // //everytime u go to signup page, remove isLoggedIn
+  // window.localStorage.removeItem("isLoggedin");
+  if (window.localStorage.getItem("isLoggedIn")) {
+    window.localStorage.removeItem("isLoggedIn");
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -55,6 +61,7 @@ function Signup() {
             verification: event.target.verification.value,
           })
             .then((data) => {
+              window.localStorage.setItem("isLoggedIn", true); 
               setSignPage(!signupPage);
             })
             .catch(console.log('error'));
@@ -148,7 +155,7 @@ function Signup() {
 
           <button id='submitButton' type='submit'>Submit</button>
         </form>
-        : <Redirect to='/home' />}
+        : <Redirect to='/home'/>}
     </div>
   )
 }

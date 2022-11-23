@@ -14,17 +14,23 @@ import {
     Route,
     Link,
     Redirect,
-    withRouter
+    withRouter,
 } from "react-router-dom";
+import { useEffect } from 'react';
 
 const fetcher = url => axios.get(url).then(res => res.data)
 
 export default function UserTable() {
+    // useEffect(() => {
+    //     window.localStorage.setItem("isLoggedIn", true);
+    // });
+
     const { data, error } = useSWR("/api/getAll", fetcher)
     const [showVerification, setShowVerification] = useState(false)
     const [verificationCode, setVerificationCode] = useState("")
     const [clicked, setClick] = useState(false);
     const [logout, setLogout] = useState(false);
+    const [edit, setEdit] = useState(false);
     const [searchParam, setSearchParam] = useState("")
     const [searchKey, setSearchKey] = useState("first_name")
     const users = data || []
@@ -36,6 +42,10 @@ export default function UserTable() {
         setLogout(!logout);
     }
     
+    const goEdit =[];
+    function goToEditComponent () {
+        setEdit(!edit)
+    }
     // const refresh = [];
     // if (window.localStorage.getItem("isLoggedIn")) {
     //     refresh.push(<Redirect to={{
@@ -44,6 +54,10 @@ export default function UserTable() {
     //     }}
     //     />)
     // }
+    const notLoggedIn = [];
+    if (!window.localStorage.getItem("isLoggedIn")) {
+        notLoggedIn.push(<Redirect to ='/signup'/>)
+    }
 
     const redirect = []
     if (logout) {
@@ -53,6 +67,11 @@ export default function UserTable() {
         }}
         />)
     }
+
+    // useEffect() {
+    //     window.localStorage.setItem("isLoggedIn", true)
+    // }
+
     function handleSearch(sortKey) {
         requestSort(sortKey, searchKey, searchParam)
     }
@@ -80,6 +99,8 @@ export default function UserTable() {
     };
 
     return (
+        <div> 
+        {!edit ?
         <div className="px-4 sm:px-6 lg:px-8">
             {showVerification && <VerificationCode code={verificationCode} />}
             <div className="sm:flex sm:items-center">
@@ -87,6 +108,13 @@ export default function UserTable() {
                     <h1 className="text-xl font-semibold text-gray-900">Codesmith Residents and Alumni</h1>
                 </div>
                 <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+                <button
+                        type="button"
+                        onClick={goToEditComponent}
+                        className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 mr-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+                    >
+                        Edit Profile
+                    </button>
                     <button
                         type="button"
                         onClick={() => handleShowVerification()}
@@ -226,5 +254,9 @@ export default function UserTable() {
             </div>
             {redirect}
         </div>
+        :
+          <Redirect to='/edit'/>
+          }
+          </div>
     )
 }
