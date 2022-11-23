@@ -3,3 +3,4 @@ pb_data/
 pocketbase
 dist/
 coverage/
+output.css

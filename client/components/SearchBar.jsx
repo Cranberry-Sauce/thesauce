@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 export default function SearchBar(params) {
     const { searchParam, setSearchParam, searchKey, setSearchKey, handleSearch } = params.params;
     const [lastSearchParam, setLastSearchParam] = useState(searchParam);
+    const [lastSearchKey, setLastSearchKey] = useState(searchKey);
     return (
         <div className='mt-6'>
             <label htmlFor="phone-number" className="block text-sm font-medium text-gray-700">
@@ -20,7 +21,8 @@ export default function SearchBar(params) {
                             <option value='first_name' >First Name</option>
                             <option value='last_name' >Last Name</option>
                             <option value='email' >Email</option>
-                            <option value='cohort_num'>Cohort</option>
+                            <option value='cohort_num'>Cohort Number</option>
+                            <option value='cohort_location'>Cohort Location</option>
                             <option value='city' >Location</option>
                             <option value='resident_alum' >Resident/Alumni</option>
                             <option value='employer' >Company</option>
@@ -28,15 +30,16 @@ export default function SearchBar(params) {
                         </select>
                     </div>
                     <input type="text" name="search-param" id="search-param" onChange={(e) => setSearchParam(e.target.value)} value={searchParam}
-                        className="block w-[500px] rounded-md border-gray-300 pl-16 focus:border-indigo-500 focus:ring-indigo-500 pl-48 sm:text-sm"
+                        className="block w-[500px] rounded-md border-gray-300 pl-16 focus:border-indigo-500 focus:ring-indigo-500 pl-40 sm:text-sm"
                         placeholder="John Doe" />
                 </div>
                 <button
                     type="button"
                     onClick={() => {
-                        if (searchParam !== lastSearchParam) {
+                        if (searchParam !== lastSearchParam || searchKey !== lastSearchKey) {
                             handleSearch();
                             setLastSearchParam(searchParam);
+                            setLastSearchKey(searchKey);
                         }
                     }
                     } //dont allow the user to search if the search param is the same as the last search param
