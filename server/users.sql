@@ -3,7 +3,7 @@ CREATE TABLE public.users (
 	"image_url" varchar,
 	"first_name" varchar NOT NULL,
 	"last_name" varchar NOT NULL,
-	"email" varchar NOT NULL,
+	"email" varchar NOT NULL UNIQUE,
 	"resident_alum" varchar NOT NULL,
 	"cohort_location" varchar NOT NULL,
 	"city" varchar NOT NULL,
