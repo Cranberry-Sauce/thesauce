@@ -23,6 +23,7 @@ import {
 const clientId = '210769127399-2l6p37ude8fr30ufsv4hmjkhkfdcb2jj.apps.googleusercontent.com'
 
 function LoginButton(props) {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [success, setSuccess] = useState(false);
     const [fail, setFail] = useState(false);
     const [email, setEmail] = useState('');
@@ -60,6 +61,8 @@ function LoginButton(props) {
         axios.get('/api/signin', { params: { email: fetchEmail } })
             .then(({ data }) => {
                 if (!Object.keys(data).length) setFail(!fail)
+                window.localStorage.setItem('email', fetchEmail)
+                window.localStorage.setItem("hasAnAcc", true);
                 setSuccess(!success);
             })
             .catch(console.error);
@@ -67,10 +70,17 @@ function LoginButton(props) {
 
     //fail verif by google -> route to signup page
     const onFailure = (res) => {
-        //on failure redirect to signup
+        // window.localStorage.removeItem("isLoggedIn");
     }
+
+    const loggedIn = [];
+    if (window.localStorage.getItem("hasAnAcc")) {
+        loggedIn.push(<Redirect to='/home'
+        />)
+    }
+
     const signup = []
-    if (fail) {
+    if (fail) { 
         signup.push(<Redirect to={{
             pathname: '/signup',
             state: {
@@ -101,9 +111,12 @@ function LoginButton(props) {
                     />
                 </div>
                 :
-                <Redirect to='/home'
+                <Redirect to={{
+                    pathname: '/home',
+                }}
                 />
             }
+            {loggedIn}
             {signup}
         </div>
     )

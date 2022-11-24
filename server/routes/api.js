@@ -24,4 +24,8 @@ router.get('/checkVerification', usersController.checkVerification, (req, res) =
   res.status(200).json(res.locals.match);
 })
 
+router.put('/updateUser', usersController.updateUser, (req, res) => {
+  res.status(200).json(res.locals.updatedUser)
+})
+
 module.exports = router;
