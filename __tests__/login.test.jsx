@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { BrowserRouter, Router, Route, Switch } from 'react-router-dom';
+
 import Page from '../client/index';
 import Login from '../client/components/login';
 // // import App from '../client/App';
@@ -21,28 +22,17 @@ describe('Unit testing login page', () => {
   });
 
   test('Testing that button gets invoked on click', async () => {
-    // render(<GoogleLogin />);
     const test = jest.fn();
-    const button = screen.getByRole('button', { pressed: false });
+    render(
+      <BrowserRouter>
+        <Login test={test} />
+      </BrowserRouter>
+    );
+    const button = screen.getByRole('button', {
+      name: 'Sign in with Google',
+    });
     // button.props.onClick = test;
     await userEvent.click(button);
-    expect(button.pressed).toBe(true);
-    screen.debug();
+    expect(test).toHaveBeenCalledTimes(1);
   });
 });
-
-// test('A', async () => {
-//   //setup
-//   const user = userEvent.setup();
-
-//   const sensing = jest.fn();
-//   const subject = (<button onClick={sensing}>testButton</button>);
-
-//   render(subject);
-
-//   // run
-//   await user.click(screen.getByText('testButton'));
-
-//   // check
-//   expect(sensing).toBeCalledTimes(1);
-// });

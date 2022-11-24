@@ -14,8 +14,10 @@ describe('User Table tests', () => {
     );
   });
   test('it renders', () => {
-    const inviteBtn = screen.getByRole('button', { name: 'Invite a user' });
-    console.debug(inviteBtn);
+    const editButton = screen.getByRole('button', {
+      className: 'mt-4 sm:mt-0 sm:ml-16 sm:flex-none',
+    });
+    console.debug(editButton);
     // screen.debug();
   });
   // test('')

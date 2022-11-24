@@ -1,5 +1,5 @@
 import { BarsArrowDownIcon, UsersIcon } from '@heroicons/react/20/solid'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, React } from 'react'
 
 export default function SearchBar(params) {
     const { searchParam, setSearchParam, searchKey, setSearchKey, handleSearch } = params.params;
