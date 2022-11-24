@@ -99,4 +99,44 @@ usersController.checkVerification = (req, res, next) => {
     .catch(e => console.log(e, 'Error at usersController.checkVerification'));
 }
 
+usersController.updateUser = (req, res, next) => {
+  console.log('update user hit');
+  const {
+    first_name, 
+    last_name, 
+    showemail, 
+    resident_alum, 
+    cohort_location, 
+    city, 
+    employed, 
+    employer, 
+    salary,
+    showsalary,
+    cohort_num, 
+    linkedin, 
+    email,
+  } = req.body
+  const getUser = `UPDATE users SET 
+    first_name = '${first_name}', 
+    last_name = '${last_name}', 
+    showemail = ${showemail}, 
+    resident_alum = '${resident_alum}', 
+    cohort_location = '${cohort_location}', 
+    city = '${city}', 
+    employed = '${employed}', 
+    employer = '${employer}', 
+    salary = ${salary},
+    showsalary = ${showsalary},
+    cohort_num = ${cohort_num},
+    linkedin = '${linkedin}'
+    WHERE email='${email}'`;
+    // console.log('email', window.localStorage.getItem("email"))
+  db.query(getUser)
+  .then((data) => {
+    res.locals.updatedUser = data;
+    return next();
+  })
+  .catch(e => console.log(e, 'Error at usersController.updateUser'))
+}
+
 module.exports = usersController;
