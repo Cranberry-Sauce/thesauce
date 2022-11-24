@@ -68,10 +68,6 @@ export default function UserTable() {
         />)
     }
 
-    // useEffect() {
-    //     window.localStorage.setItem("isLoggedIn", true)
-    // }
-
     function handleSearch(sortKey) {
         requestSort(sortKey, searchKey, searchParam)
     }

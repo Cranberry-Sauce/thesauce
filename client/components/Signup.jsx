@@ -132,7 +132,7 @@ function Signup() {
             <input type='checkbox' checked={showSalary} value={showSalary} onChange={() => setShowSalary((showSalary) => !showSalary)} id='salaryVisibility'></input>
           </div>
 
-          <label for='verification'>Verification code:<br></br></label>
+          <label for='verification'>Verification Code:<br></br></label>
           <input type='text' id='verification' placeholder='Verification Code' onChange={removeError} required></input>
 
           <button id='submitButton' type='submit'>Submit</button>
