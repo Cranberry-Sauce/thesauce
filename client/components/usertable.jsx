@@ -38,7 +38,7 @@ export default function UserTable() {
 
 
     function handleClickToLogout() {
-        window.localStorage.removeItem("isLoggedIn");
+        window.localStorage.removeItem("hasAnAcc");
         setLogout(!logout);
     }
     
@@ -55,10 +55,10 @@ export default function UserTable() {
     //     />)
     // }
     const notLoggedIn = [];
-    if (!window.localStorage.getItem("isLoggedIn")) {
+    if (!window.localStorage.getItem("hasAnAcc")) {
         notLoggedIn.push(<Redirect to ='/signup'/>)
     }
-
+    
     const redirect = []
     if (logout) {
         redirect.push(<Redirect to={{

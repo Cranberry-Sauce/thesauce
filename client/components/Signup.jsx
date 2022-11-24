@@ -22,14 +22,16 @@ function Signup() {
   let showSalary = false;
   let showEmail = false;
 
+  let signUpSubmitted = false;
+
   let element = document.getElementById('verification');
   let addError = function () { element.classList.add('error'); };
   const removeError = function () { setMatchVer('') };
   
   // //everytime u go to signup page, remove isLoggedIn
   // window.localStorage.removeItem("isLoggedin");
-  if (window.localStorage.getItem("isLoggedIn")) {
-    window.localStorage.removeItem("isLoggedIn");
+  if (window.localStorage.getItem("hasAnAcc")) {
+    window.localStorage.removeItem("hasAnAcc");
   }
 
   const handleSubmit = (event) => {
@@ -41,7 +43,9 @@ function Signup() {
           alert('Invalid Verification Code')
         }
         else {
-          axios.post('/api/signup', {
+          if (!signUpSubmitted) {
+            signUpSubmitted = true; 
+            axios.post('/api/signup', {
             imageUrl: state.imageUrl,
             firstName: event.target.firstName.value.charAt(0).toUpperCase() + event.target.firstName.value.slice(1),
             lastName: event.target.lastName.value,
@@ -61,11 +65,11 @@ function Signup() {
             verification: event.target.verification.value,
           })
             .then((data) => {
-              window.localStorage.setItem("isLoggedIn", true); 
               setSignPage(!signupPage);
             })
             .catch(console.log('error'));
         }
+      }
       })
     // axios.post('/api/signup', {
     //   imageUrl: state.imageUrl,
